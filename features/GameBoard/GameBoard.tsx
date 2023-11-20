@@ -3,7 +3,7 @@ import Grid from "./Grid";
 import GridRow from "./GridRow";
 import { useEffect, useState } from "react";
 import { TxtList } from "../../App";
-import { getFirstText, leftAction } from "./functions/functions";
+import { getFirstText, rightAction } from "./functions/functions";
 
 interface GameBoardProps {
   grid: number; // 何×何かを表す数
@@ -64,7 +64,13 @@ const GameBoard: React.FC<GameBoardProps> = (props) => {
           />
         ))}
       </View>
-      <Button onPress={() => setGridlist(leftAction(gridList))} title="a" />
+      <Button
+        onPress={() => {
+          const tmp = rightAction(gridList);
+          setGridlist([...tmp]);
+        }}
+        title="a"
+      />
     </View>
   );
 };

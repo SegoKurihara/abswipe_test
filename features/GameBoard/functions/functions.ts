@@ -41,15 +41,39 @@ const canMoveRow = (gridInfo: gridInfo[]) => {
   }
 };
 
-export const leftAction = (gridInfos: gridInfo[][]) => {
-  const infos = gridInfos;
-  const len = infos.length - 1;
-  const idx = 0;
-  // 0.4 karanotoki
-  //   if (!infos[idx][len].isEmpty) {
-  //     if (!infos[idx][len - 1].isEmpty) {
-  //         infos[idx][len].txt
-  //     }
-  //   }
-  return infos;
+export const rightAction = (gridInfos: gridInfo[][]) => {
+  const ifs = gridInfos;
+  const len = ifs.length - 1;
+  //   const idx = 0;
+
+  ifs.forEach((item, idx) => {
+    // 文字が入っているマスをフィルター
+    const ftr = ifs[idx].filter((itm) => itm.isEmpty == false);
+    // 文字が入っているマスの数
+    const ftrm = ftr.length;
+    // 対象の一行
+    const ifsi = ifs[idx];
+
+    // 一つしかない場合
+    if (ftrm == 1) {
+      const txt = ftr[0].txt;
+      const clm = ftr[0].indexColumn;
+      // 元のマスを空にする
+      ifsi[clm] = { ...ifs[idx][clm], txt: "", isEmpty: true };
+      // 右端に寄せる
+      ifsi[len] = { ...ifs[idx][len], txt: txt, isEmpty: false };
+    } else if (ftrm >= 2) {
+      // ifsi[]
+    }
+    // 右端が空の場合
+    //   if (!ifs[idx][len].isEmpty) {
+    //   }
+    //   if (!ifs[idx][len].isEmpty) {
+    //     if (!ifs[idx][len - 1].isEmpty) {
+    //       ifs[idx][len].txt;
+    //     }
+    //   }
+  });
+  console.log(ifs);
+  return ifs;
 };
