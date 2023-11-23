@@ -2,12 +2,18 @@ import { View, StyleSheet, Button } from "react-native";
 import Grid from "./Grid";
 import GridRow from "./GridRow";
 import { useEffect, useState } from "react";
-import { TxtList } from "../../App";
-import { getFirstText, rightAction } from "./functions/functions";
+import { Dict, TxtList } from "../../App";
+import {
+  GetRandomText,
+  GetWordForEmptyPlace,
+  // GetWordForEmptyPlace,
+  RightAction,
+} from "./functions/functions";
 
 interface GameBoardProps {
   grid: number; // 何×何かを表す数
   txtList: TxtList; // 扱う文字の初期値リスト
+  dictionary: Dict; // 扱う文字の辞書
 }
 
 export type gridInfo = {
@@ -18,9 +24,10 @@ export type gridInfo = {
 };
 
 const GameBoard: React.FC<GameBoardProps> = (props) => {
-  const { grid, txtList } = props;
+  const { grid, txtList, dictionary } = props;
   // const gridList: gridInfo[][] = [];
   const [gridList, setGridlist] = useState<gridInfo[][]>([]);
+  const firstGridNum = Math.round(grid / 2);
 
   useEffect(() => {
     init();
@@ -41,12 +48,13 @@ const GameBoard: React.FC<GameBoardProps> = (props) => {
 
     const length = tmpList.length;
     let count = 0;
-    while (count < 2) {
+    // while (count < firstGridNum) {
+    while (count < firstGridNum) {
       const row = Math.floor(Math.random() * length);
       const column = Math.floor(Math.random() * length);
       if (tmpList[column][row].isEmpty) {
         // ランダムに文字を入れます
-        getFirstText(tmpList[column][row], txtList);
+        GetRandomText(tmpList[column][row], txtList);
         count++;
       }
     }
@@ -64,13 +72,30 @@ const GameBoard: React.FC<GameBoardProps> = (props) => {
           />
         ))}
       </View>
-      <Button
-        onPress={() => {
-          const tmp = rightAction(gridList);
-          setGridlist([...tmp]);
-        }}
-        title="a"
-      />
+      <View style={{ marginTop: 5 }}>
+        <Button
+          onPress={() => {
+            // 右操作
+            const tmp: gridInfo[][] = RightAction(gridList, dictionary);
+            // 文字を生成
+            GetWordForEmptyPlace(firstGridNum, tmp, txtList);
+            setGridlist([...tmp]);
+          }}
+          title="右→"
+        />
+      </View>
+      <View style={{ marginTop: 5 }}>
+        <Button
+          onPress={() => {
+            // 右操作
+            const tmp: gridInfo[][] = RightAction(gridList, dictionary);
+            // 文字を生成
+            // GetWordForEmptyPlace(firstGridNum, tmp, txtList);
+            setGridlist([...tmp]);
+          }}
+          title="下↓"
+        />
+      </View>
     </View>
   );
 };

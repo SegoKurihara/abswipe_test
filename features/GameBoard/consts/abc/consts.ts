@@ -3,7 +3,8 @@ import { TxtList } from "../../../../App";
 // ABモード
 export const txtListAB: TxtList = { first: "a", second: "b" };
 
-export const listAB = [
+// ABモードのDictionary
+export const dictAB = [
   "a",
   "b",
   "c",
