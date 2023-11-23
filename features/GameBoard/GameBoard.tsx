@@ -78,7 +78,10 @@ const GameBoard: React.FC<GameBoardProps> = (props) => {
             // 右操作
             const tmp: gridInfo[][] = RightAction(gridList, dictionary);
             // 文字を生成
-            GetWordForEmptyPlace(firstGridNum, tmp, txtList);
+            let isGot = false;
+            while (!isGot) {
+              isGot = GetWordForEmptyPlace(firstGridNum, tmp, txtList);
+            }
             setGridlist([...tmp]);
           }}
           title="右→"

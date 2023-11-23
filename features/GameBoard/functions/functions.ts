@@ -25,12 +25,13 @@ export const GetWordForEmptyPlace = (
   num: number,
   info: gridInfo[][],
   txtList: TxtList
-) => {
+): boolean => {
   const obj = GetEmptyPlace(info);
   if (obj.isEmpty) {
     GetRandomText(info[obj.col][obj.row], txtList);
+    return true;
   }
-  return info;
+  return false;
 };
 
 /**
@@ -45,22 +46,6 @@ export const GetNextWord = (
 ) => {
   const index = dict.findIndex((item) => item === txt);
   return dict[index + 1];
-};
-
-const canMoveRow = (gridInfo: gridInfo[]) => {
-  // 行に何個文字が入っているか調べる
-  const filteredRow = gridInfo.filter((item) => item.isEmpty == false);
-  const filteredRowNum = filteredRow.length;
-  if (filteredRowNum < gridInfo.length) {
-    return true;
-  }
-  if (filteredRowNum == gridInfo.length) {
-    gridInfo.forEach((item, index) => {
-      if (item.txt == gridInfo[index - 1].txt) {
-        return true;
-      }
-    });
-  }
 };
 
 export const RightAction = (gridInfos: gridInfo[][], dict: Dict) => {
