@@ -108,7 +108,7 @@ export default GameBoard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "yellow",
+    // backgroundColor: "yellow",
     flexDirection: "column",
     padding: 20,
 
@@ -127,9 +127,13 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     aspectRatio: 1,
-    margin: 2,
+    margin: 4,
     alignItems: "center",
     justifyContent: "center",
-    border: "solid",
+    borderRadius: 6,
+    fontSize: 34,
+    backgroundColor: "#ffd150",
+    // shadowColor: "#ffc41d",
+    // shadowOffset: { width: 2, height: 2 },
   },
 });
