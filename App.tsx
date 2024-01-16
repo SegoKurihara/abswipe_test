@@ -4,7 +4,6 @@ import ScoreBoard from "./features/ScoreBoard/ScoreBoard";
 import GameBoard from "./features/GameBoard/GameBoard";
 import { dictAB, txtListAB } from "./features/GameBoard/consts/abc/consts";
 
-//西郷栗原
 export type TxtList = { first: string; second: string };
 export type Dict = string[] | number[];
 
